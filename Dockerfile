@@ -10,5 +10,5 @@ RUN yarn
 RUN yarn build
 
 # final stage
-FROM nginx
+FROM nginx:alpine
 COPY --from=build-env /pgurl-fe/build/ /usr/share/nginx/html
