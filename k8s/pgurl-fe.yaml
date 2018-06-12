@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: pgurl-fe
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pgurl-fe
+    spec:
+      containers:
+        - name: pgurl-fe
+          image: pgurl/pgurl-fe
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pgurl-fe-service
+  labels:
+    name: pgurl-fe-service
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  selector:
+    app: pgurl-fe
+  type: LoadBalancer
